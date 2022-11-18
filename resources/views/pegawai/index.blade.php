@@ -4,7 +4,17 @@
     <div class="card recent-sales overflow-auto">
         <div class="card-body">
             <h5 class="card-title">Data Pegawai</h5>
-
+            <br />
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success">
+                <p>{{ $message }}</p>
+            </div>
+            @endif
+            <br />
+            <a class="btn btn-primary btn-sm" title="Tambah Pegawai" href=" {{ route('pegawai.create') }}">
+                <i class="bi bi-save"></i>
+            </a>
+            <br /><br />
             <table class="table table-borderless datatable">
                 <thead>
                     <tr>
@@ -30,10 +40,24 @@
                         <td>{{ $row->gender }}</td>
                         <td>{{ $row->foto }}</td>
                         <td>
-                            <a class="btn btn-info btn-sm" title="Detail Pegawai"
-                                href=" {{ route('pegawai.show',$row->id) }}">
-                                <i class="bi bi-eye"></i>
-                            </a>
+                            <form method="POST" action="{{ route('pegawai.destroy',$row->id) }}">
+                                @csrf
+                                @method('DELETE')
+                                <a class="btn btn-info btn-sm" title="Detail Pegawai"
+                                    href=" {{ route('pegawai.show',$row->id) }}">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+                                &nbsp;
+                                <a class="btn btn-warning btn-sm" title="Ubah Pegawai"
+                                    href=" {{ route('pegawai.edit',$row->id) }}">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                &nbsp;
+                                <button type="submit" class="btn btn-danger btn-sm" title="Hapus Pegawai"
+                                    onclick="return confirm('Anda Yakin Data akan diHapus?')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
