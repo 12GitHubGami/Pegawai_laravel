@@ -75,3 +75,4 @@ Route::resource('staff',StaffController::class);
 Route::resource('divisi',DivisiController::class);
 Route::resource('jabatan',JabatanController::class);
 Route::resource('pegawai',PegawaiController::class);
+Route::get('pegawai-edit/{id}', [PegawaiController::class,'edit']);

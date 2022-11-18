@@ -4,8 +4,17 @@
     <div class="row">
         <div class="col-xl-12">
             <div class="card">
+                @if ($message = Session::get('success'))
+                <div class="alert alert-success">
+                    <p>{{ $message }}</p>
+                </div>
+                @endif
                 <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                    <img src="{{ url('admin/img/profile-img.jpg') }}" alt="Profile" class="rounded-circle">
+                    @empty($row->foto)
+                    <img src="{{ url('admin/img/nophoto.png') }}" alt="Profile" class="rounded-circle">
+                    @else
+                    <img src="{{ url('admin/img')}}/{{$row->foto}}" alt="Profile" class="rounded-circle">
+                    @endempty
                     <h2>{{ $row->nama }}</h2>
                     <h3>{{ $row->jabatan->nama }}</h3>
                 </div>

@@ -38,8 +38,14 @@
                         <td>{{ $row->jabatan->nama }}</td>
                         <td>{{ $row->divisi->nama }}</td>
                         <td>{{ $row->gender }}</td>
-                        <td>{{ $row->foto }}</td>
-                        <td>
+                        <td width="10%">
+                            @empty($row->foto)
+                            <img src="{{ url('admin/img/nophoto.png') }}" width="35%" alt="Profile" class="rounded-circle">
+                            @else
+                            <img src="{{ url('admin/img')}}/{{$row->foto}}" width="35%" alt="Profile" class="rounded-circle">
+                            @endempty
+                        </td>
+                        <td width="15%">
                             <form method="POST" action="{{ route('pegawai.destroy',$row->id) }}">
                                 @csrf
                                 @method('DELETE')
@@ -49,7 +55,7 @@
                                 </a>
                                 &nbsp;
                                 <a class="btn btn-warning btn-sm" title="Ubah Pegawai"
-                                    href=" {{ route('pegawai.edit',$row->id) }}">
+                                    href=" {{ url('pegawai-edit',$row->id) }}">
                                     <i class="bi bi-pencil"></i>
                                 </a>
                                 &nbsp;
